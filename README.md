@@ -1,7 +1,11 @@
 closetag.vim
 ============
 
-Auto close tag, support xml files.
+Auto close tag, support xml files. In addition to the [alvan version](https://github.com/alvan/vim-closetag), a line feed is added and the cursor is set with the appropriate indentation.
+
+Demo with [MatchTagAlways](https://github.com/vim-IDE/MatchTagAlways) activated.
+
+![alt tag](gif/example.gif)
 
 Just set this in your vimrc:
 
