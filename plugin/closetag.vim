@@ -61,7 +61,7 @@ fun! s:InitBuf()
 endf
 call s:InitBuf()
 
-fun! s:SavePos()
+fun! s:SavePos()	
     retu 'call cursor('.line('.').','. col('.'). ')'
 endf
 
@@ -71,7 +71,7 @@ fun! s:Callback(xml_tag, isHtml)
         let text = HtmlAttribCallback (a:xml_tag)
     elseif exists ("*XmlAttribCallback")
         let text = XmlAttribCallback (a:xml_tag)
-    endif
+    endif       
     if text != '0'
         execute "normal! i " . text ."\<Esc>l"
     endif
@@ -79,7 +79,7 @@ endf
 
 " GetTagName() Gets the tagname from start position                     {{{1
 "Now lets go for the name part. The namepart are xmlnamechars which
-"is quite a big range. We assume that everything after '<' or '</'
+"is quite a big range. We assume that everything after '<' or '</' 
 "until the first 'space', 'forward slash' or '>' ends de name part.
 fun! s:GetTagName(from)
     let l:end = match(getline('.'), s:EndofName,a:from)
@@ -90,7 +90,7 @@ endf
 " expect cursor to be on <
 fun! s:hasAtt()
     "Check if this open tag has attributes
-    let l:line = line('.') | let l:col = col('.')
+    let l:line = line('.') | let l:col = col('.') 
     if search(b:tagName . s:ReqAttrib,'W') > 0
         if l:line == line('.') && l:col == (col('.')-1)
             let b:haveAtt = 1
@@ -148,7 +148,7 @@ fun! s:TagUnderCursor()
                 retu l:haveTag
             en
         el
-	retu l:haveTag
+            retu l:haveTag
         en
     el
         retu l:haveTag
@@ -177,10 +177,10 @@ fun! s:TagUnderCursor()
     "'</\?[^>]*>'
 
     let b:tagName = s:GetTagName(col('.') + b:firstWasEndTag)
-    "echo 'Tag ' . b:tagName
+    "echo 'Tag ' . b:tagName 
 
     "begin: gwang customization, do not work with an empty tag name
-    if b:tagName == ''
+    if b:tagName == '' 
         retu l:haveTag
     en
     "end: gwang customization, do not work with an empty tag name
@@ -241,8 +241,7 @@ fun! s:CloseTagFun()
                 if b:haveAtt == 0
                     call s:Callback (b:tagName, b:html_mode)
                 en
-                exe "normal! a\n \n</" . b:tagName . ">\<Esc>F<"
-				call cursor(line('.') - 1, col('.') + 4)
+                exe "normal! a</" . b:tagName . ">\<Esc>F<"
                 start
                 retu
             en
